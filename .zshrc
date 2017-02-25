@@ -1,4 +1,7 @@
-# Set up the prompt
+# source profile
+if [ -f /etc/profile ]; then
+    source /etc/profile
+fi
 
 autoload -Uz promptinit
 promptinit
@@ -57,6 +60,11 @@ mkdir -p $HOME/.zsh/cache
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path $HOME/.zsh/cache
 
-for file in $(find $HOME/.profile.d -name '*.env' -type f) ; do
-  source $file
+for ext in 'sh' 'inc' 'zsh' ; do
+  for file in $(find $HOME/profile.d -name "*.${ext}" -type f) ; do . $file ; done
 done
+
+if [[ ! $TERM =~ screen ]]; then
+   exec tmux
+fi
+
