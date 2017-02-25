@@ -1,7 +1,4 @@
-# source profile
-if [ -f /etc/profile ]; then
-    source /etc/profile
-fi
+# ZSHELL config file
 
 autoload -Uz promptinit
 promptinit
@@ -61,7 +58,7 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path $HOME/.zsh/cache
 
 for ext in 'sh' 'inc' 'zsh' ; do
-  for file in $(find $HOME/profile.d -name "*.${ext}" -type f) ; do . $file ; done
+  for file in $(find $HOME/.profile.d -name "*.${ext}" -type f) ; do . $file ; done
 done
 
 if [[ ! $TERM =~ screen ]]; then
