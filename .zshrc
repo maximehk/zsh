@@ -33,6 +33,7 @@ setopt HIST_SAVE_NO_DUPS
 # Use modern completion system
 autoload -Uz compinit
 compinit
+bindkey -e  # emacs key bindings
 
 # Search history on key up/down
 autoload -U up-line-or-beginning-search
