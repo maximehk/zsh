@@ -99,7 +99,7 @@ for ext in 'sh' 'inc' 'zsh' ; do
   for file in $(find $HOME/.profile.d -name "*.${ext}" -type f) ; do . $file ; done
 done
 
-if [[ ! $TERM =~ screen ]]; then
-   exec tmux
-fi
+#if [[ ! $TERM =~ screen ]]; then
+#   exec tmux
+#fi
 
