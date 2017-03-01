@@ -17,4 +17,5 @@ alias nyt='TZ=America/New_York date'
 alias edt='TZ=America/New_York date'
 alias d='TZ=Europe/Paris date'
 
-
+# Misc
+alias xclip="xclip -selection c"  # copy stdin to clipboard
