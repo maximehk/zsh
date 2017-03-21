@@ -37,6 +37,8 @@ autoload -U down-line-or-beginning-search
 compinit
 
 bindkey -e  # emacs key bindings
+setopt menucomplete
+
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
