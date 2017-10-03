@@ -19,3 +19,6 @@ alias d='TZ=Europe/Paris date'
 
 # Misc
 alias xclip="xclip -selection c"  # copy stdin to clipboard
+
+# Alias SublimeText with `s` if it is in the path
+sublime_path=$(which subl) 2> /dev/null && alias s="${sublime_path}"
