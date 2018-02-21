@@ -67,10 +67,14 @@ key[PageDown]=${terminfo[knp]}
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
 function zle-line-init () {
+  if (( ${+terminfo[smkx]} )); then
     echoti smkx
+  fi
 }
 function zle-line-finish () {
+  if (( ${+terminfo[rmkx]} )); then
     echoti rmkx
+  fi
 }
 zle -N zle-line-init
 zle -N zle-line-finish  
