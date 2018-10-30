@@ -9,12 +9,12 @@ _init_prompt() {
   promptinit
 
   local host="$(hostname -f | cut -d'.' -f1,2)"
-  prompt="%K{blue}%n@${host}%k %B%F{cyan}%(4~|...|)%3~%F{white} %# %b%f%k"
+  export PROMPT="%K{blue}%n@${host}%k %B%F{cyan}%(4~|...|)%3~%F{white} %# %b%f%k"
 }
 
 _init_prompt
-
 # prompt adam1
+
 
 export EDITOR="vi"
 
