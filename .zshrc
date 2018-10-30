@@ -1,8 +1,20 @@
 # ZSHELL config file
 
-autoload -Uz promptinit
-promptinit
-prompt adam1
+local zshrc_start="$(date +'%s.%N')"
+
+perf_log="$HOME/.profile_perf.log"
+
+_init_prompt() {
+  autoload -Uz promptinit
+  promptinit
+
+  local host="$(hostname -f | cut -d'.' -f1,2)"
+  prompt="%K{blue}%n@${host}%k %B%F{cyan}%(4~|...|)%3~%F{white} %# %b%f%k"
+}
+
+_init_prompt
+
+# prompt adam1
 
 export EDITOR="vi"
 
@@ -30,11 +42,20 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_SAVE_NO_DUPS
 
 
+local end="$(date +'%s.%N')"
+let duration=$end-$zshrc_start
+echo "$$,$HOME/zshrc_setopts,$duration" >> "$perf_log"
+
 # Use modern completion system
 autoload -Uz compinit
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 compinit
+
+local end="$(date +'%s.%N')"
+let duration=$end-$zshrc_start
+echo "$$,$HOME/zshrc_compinit,$duration" >> "$perf_log"
+
 
 bindkey -e  # emacs key bindings
 setopt menucomplete
@@ -64,6 +85,12 @@ key[PageDown]=${terminfo[knp]}
 [[ -n "${key[Left]}"    ]]  && bindkey  "${key[Left]}"    backward-char
 [[ -n "${key[Right]}"   ]]  && bindkey  "${key[Right]}"   forward-char "$terminfo[kcuu1]" up-line-or-beginning-search
 
+
+local end="$(date +'%s.%N')"
+let duration=$end-$zshrc_start
+echo "$$,$HOME/zshrc_keys,$duration" >> "$perf_log"
+
+
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
 function zle-line-init () {
@@ -78,6 +105,12 @@ function zle-line-finish () {
 }
 zle -N zle-line-init
 zle -N zle-line-finish  
+
+
+local end="$(date +'%s.%N')"
+let duration=$end-$zshrc_start
+echo "$$,$HOME/zshrc_zle,$duration" >> "$perf_log"
+
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -101,11 +134,30 @@ mkdir -p $HOME/.zsh/cache
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path $HOME/.zsh/cache
 
+
+local end="$(date +'%s.%N')"
+let duration=$end-$zshrc_start
+echo "$$,$HOME/zshrc_ztyle,$duration" >> "$perf_log"
+
 for ext in 'sh' 'inc' 'zsh' ; do
-  for file in $(find $HOME/.profile.d -name "*.${ext}" -type f) ; do . $file ; done
+  for file in $(find $HOME/.profile.d -name "*.${ext}" -type f) ; do
+    # t="$(date +'%H:%M:%S.%N')"
+    # echo "${t}: $file"
+    local start="$(date +'%s.%N')"
+    . $file
+    end="$(date +'%s.%N')"
+    let duration=$end-$start
+    echo "$$,$file,$duration" >> "$perf_log"
+  done
 done
 
 #if [[ ! $TERM =~ screen ]]; then
 #   exec tmux
 #fi
+
+local end="$(date +'%s.%N')"
+let duration=$end-$zshrc_start
+echo "$$,$HOME/zshrc_end,$duration" >> "$perf_log"
+
+export HISTIGNORE='rm *:svn revert*'
 
