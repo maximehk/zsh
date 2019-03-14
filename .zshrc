@@ -19,6 +19,7 @@ _init_prompt
 export EDITOR="vi"
 
 setopt AUTO_CD  # type `dir` instead of `cd dir`
+setopt INTERACTIVE_COMMENTS
 setopt MULTIOS  # pipe to multiple outputs
 setopt NO_BEEP
 setopt NO_CASE_GLOB  # Case insensitive globbing
