@@ -156,6 +156,12 @@ done
 #   exec tmux
 #fi
 
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
+
 local end="$(date +'%s.%N')"
 let duration=$end-$zshrc_start
 echo "$$,$HOME/zshrc_end,$duration" >> "$perf_log"
