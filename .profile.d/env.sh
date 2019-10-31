@@ -4,6 +4,8 @@ _local_bin="$HOME/.local/bin"
 mkdir -p ${_local_bin}
 export PATH="${_local_bin}:$PATH"
 
+export LESS='-S'          
+
 path_remove_matching() {
   pattern="$1"
   export PATH="$(echo $PATH | perl -lne 'BEGIN{$/=":" ; $\=":"; $pattern=shift} ; if (!/$pattern/ and $c{$_}++==0) {print}' -- $pattern)"
