@@ -24,3 +24,14 @@ if [[ -d "$HOME/.local/go/bin" && -d "$HOME/go" ]] ; then
   export PATH="$PATH:$GOROOT/bin"
   export GOPATH="$HOME/go"
 fi
+
+function hcd() {
+  local name="$1"
+  if [ $name ] ; then
+    hash -d ${name}=$(pwd)
+    echo "$(pwd) aliased to ~${name}."
+  else
+    echo "Bad usage. please specify an alias for the current directory."
+  fi
+}
+
