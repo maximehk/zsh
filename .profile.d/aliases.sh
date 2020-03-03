@@ -34,3 +34,5 @@ function sony {
   fi
 }
 
+br() { xrandr 2> /dev/null | perl -lane 'if (/(\S+) connected/) {print $1}' | xargs -I@ xrandr --output @ --brightness $1 }
+
